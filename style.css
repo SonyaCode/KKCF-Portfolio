@@ -13,6 +13,7 @@ body {
     --medium-bluish-purple: #5D5D81;
     --light-blue: #BFCDE0;
     --light-gray: #FEFCFD;
+    --horizontal-line-length: 75px;
 }
 
 .navbar-color {
@@ -47,4 +48,100 @@ button a {
     border-radius: 10px;
     border: 5px solid var(--light-gray)
 
+}
+
+.timeline-section {
+    background-color: var(--light-blue);
+    color: var(--black);
+}
+
+/* Inspired by https://codepen.io/htmlcodex/pen/LYGjPgV?editors=1100 */
+/* Container of the timeline */
+.timeline {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Vertical line of the timeline */
+.timeline::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    background-color: var(--dark-bluish-purple);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+}
+
+.event {
+    padding: 15px 30px;
+    position: relative;
+    /* background-color: var(--light-gray); */
+    width: 50%;
+}
+
+/* Horizontal line for each event */
+.event::before {
+    content: '';
+    position: absolute;
+    width: var(--horizontal-line-length);
+    height: 2px;
+    top: calc(50% - 1px);
+    right: 0px;
+    background: var(--dark-bluish-purple);
+    z-index: 1;
+}
+
+/* Circle next to the horizontal line */
+.event::after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    top: calc(50% - 8px);
+    left: calc(100% - 8px - var(--horizontal-line-length)); /* 75px to the right from the center */
+    background-color: var(--dark-bluish-purple);
+    border: 2px solid var(--dark-bluish-purple);
+    border-radius: 50%;
+    text-align: center;
+    z-index: 1;
+
+}
+
+
+.left {
+    left: 0;
+}
+
+.right {
+    left: 50%;
+}
+
+.right::before {
+    left: 0;
+}
+
+.right::after {
+    left: var(--horizontal-line-length); /* 75px to the right from the center */
+}
+
+/* Prevent the content on the left to touch the horizontal line */
+.timeline-content-left {
+    width: calc(100% - var(--horizontal-line-length))
+}
+
+/* Prevent the content on the right to touch the horizontal line */
+.timeline-content-right {
+    margin-left: var(--horizontal-line-length);
+}
+
+footer {
+    background-color: var(--dark-bluish-purple);
+}
+
+footer img {
+    width: 32px;
 }
